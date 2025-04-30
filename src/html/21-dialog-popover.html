@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ko-KR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>dialog, popover</title>
+        <link
+            rel="shortcut icon"
+            href="/public/favicon/likelion.ico"
+            type="image/x-icon"
+        />
+        <link rel="icon" href="/public/favicon/likelion.svg" type="image/svg" />
+        <link
+            rel="preload"
+            as="font"
+            href="/public/font/suit/SUIT-Variable.woff2"
+        />
+        <link rel="stylesheet" href="/public/font/suit/SUIT-Variable.css" />
+        <style>
+            body {
+                font-family: 'SUIT Variable', sans-serif;
+            }
+
+            dialog {
+                border: none;
+                border-radius: 8px;
+                padding: 16px;
+                background-color: #fff;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+            dialog::backdrop {
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+            dialog h2 {
+                margin: 0;
+                font-size: 1.5rem;
+            }
+            dialog p {
+                margin: 0;
+                font-size: 1rem;
+            }
+            dialog div {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 16px;
+            }
+            dialog a,
+            dialog button {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                padding: 8px 16px;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            dialog button {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                padding: 8px 16px;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            dialog a {
+                background-color: #198754; /* 초록색 계열 */
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                padding: 8px 16px;
+                text-decoration: none;
+                cursor: pointer;
+                font-weight: bold;
+            }
+
+            dialog a:hover {
+                background-color: #157347;
+            }
+        </style>
+        <script type="module">
+            // dialog 요소는 dialog.open = true로 열 수 있음
+            // dialog.close()로 닫을 수 있음
+            // dialog.showModal()로 모달 대화상자 형태로 열 수 있음
+            // dialog.close()로 닫을 수 있음
+            const showDialogButton = document.querySelector('.show-dialog');
+            const dialog = document.querySelector('dialog');
+
+            showDialogButton.addEventListener('click', () => {
+                dialog.showModal();
+            });
+
+            const closeButtons = dialog.querySelectorAll('button');
+            closeButtons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    dialog.close();
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <a href="/index.html">메인 페이지 이동</a>
+        <br />
+
+        <button type="button" class="show-dialog">혜택 보기</button>
+        <dialog
+            aria-labelledby="surprise-benefits"
+            aria-describedby="surprise-benefits-details"
+        >
+            <h2 id="surprise-benefits">깜짝 혜택</h2>
+            <p id="surprise-benefits-details">
+                쉿! 고객님만을 위한 깜짝 할인 쿠폰이 등장했어요!
+            </p>
+            <div>
+                <a href="/">쿠폰 확인하기</a>
+                <button>오늘 하루 안 보기</button>
+                <button>닫기</button>
+            </div>
+        </dialog>
+
+        <hr />
+
+        <button
+            type="button"
+            popovertarget="popoverContent"
+            class="button-popover"
+        >
+            팝오버 보기
+        </button>
+        <div popover id="popoverContent">
+            <p>
+                팝오버는 툴팁과 비슷한 UI 요소로, 추가적인 정보를 제공하거나
+                사용자와 상호작용할 수 있는 작은 창을 표시할 때 유용하다.
+            </p>
+        </div>
+    </body>
+</html>
